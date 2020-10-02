@@ -1,0 +1,769 @@
+/// Primary
+$blue: #007bc1;
+$blue-link: #0000ee;
+$dark-blue: #004a75;
+$border-color: #d5cfcf;
+// sass --watch style.scss style.css
+$orange: #ff8000;
+$dark-orange: #cc6600;
+$smoke-grey: #e5e5e5;
+$smoke-grey-dark: #b7b7b7;
+$smoke-grey-dark-2: #4a4a4a;
+
+$breakpoint-desktop: 960px;
+$breakpoint-mobile: 480px;
+$space-standard: 10;
+$space-1: $space-standard * 0.5px;
+$space-2: $space-standard * 1px;
+$space-3: $space-standard * 2px;
+$space-4: $space-standard * 2.5px;
+
+@font-face {
+  font-family: "Roboto", sans-serif;
+  src: url("fonts/Roboto-Italic.ttf");
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  color: $smoke-grey;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: $smoke-grey;
+  height: 100vh;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  a {
+    text-decoration: none;
+    color: $blue-link;
+  }
+
+  input {
+    border: none;
+    padding: $space-1;
+    outline: none;
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      -webkit-text-fill-color: #ccc;
+      color: black !important;
+      transition: background-color 5000s ease-in-out 0s;
+      border: none;
+      outline: none;
+    }
+  }
+
+  button {
+    color: $smoke-grey;
+    cursor: pointer;
+    outline: none;
+    &:active,
+    &:focus {
+      border: none;
+    }
+  }
+
+  button {
+    border: none;
+    font-size: 1em;
+    &:focus,
+    &:active {
+      border: none;
+    }
+  }
+
+  .container {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Notification panel
+.notification {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 90px;
+  text-align: left;
+  background-color: $smoke-grey;
+  border-bottom: 1.5px solid $border-color;
+  &.toggle-notif {
+    display: none;
+  }
+  .row {
+    color: $smoke-grey-dark-2;
+    max-width: 1366px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .col-content {
+      width: 65%;
+      padding: $space-1;
+      p {
+        font-size: 0.9rem;
+      }
+    }
+    .col-button {
+      width: 10%;
+      padding: $space-1;
+      button {
+        color: white;
+        background-color: $blue;
+        border-radius: 5px;
+        font-size: 0.75rem;
+        padding: 12px 18px;
+      }
+    }
+  }
+}
+
+//Hero Shot
+.banner {
+  position: relative;
+  background-image: url("assets/background.jpg");
+  background-size: cover;
+  background-position: top center;
+  z-index: 1;
+  margin-top: 90px;
+
+  &.toggle-banner {
+    margin-top: 0;
+  }
+  .cover {
+    display: block;
+    background-color: $dark-blue;
+    opacity: 0.75;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  .header {
+    position: absolute;
+    img {
+      width: 45px;
+    }
+    padding: 20px;
+  }
+
+  .container.hero {
+    height: 75vh;
+    .row.content {
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      margin: auto;
+      h1 {
+        font-weight: 300;
+        margin-bottom: $space-1;
+      }
+      h2 {
+        margin-bottom: $space-3;
+      }
+      button {
+        padding: 10px;
+        border: 2px solid $smoke-grey;
+        background-color: transparent;
+        font-size: 0.9rem;
+      }
+      .btn-special {
+        margin-top: $space-3;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        background: transparent;
+        padding: $space-1;
+        border: 1px solid white;
+        border-radius: 3px;
+        button {
+          font-weight: bold;
+          border-radius: 2px;
+          width: 100%;
+          border: none;
+        }
+        &:hover {
+          background-color: transparent;
+          border: 1px solid white;
+          color: $dark-blue;
+          button {
+            background-color: white;
+            color: $dark-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Info how can i help you
+.info {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  color: $smoke-grey-dark-2;
+
+  .container {
+    .title {
+      text-align: center;
+      margin-bottom: 3rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+
+      h1 {
+        margin-bottom: $space-2;
+        font-weight: 500;
+      }
+      p {
+        font-weight: 500;
+      }
+    }
+
+    .box-grid-row {
+      display: grid;
+      width: 100%;
+      grid-gap: 25px;
+      max-width: 1366px;
+      margin: auto;
+      grid-template-columns: 1fr 1fr 1fr;
+      .box {
+        padding: $space-3;
+        margin: auto;
+        padding: 20px;
+        text-align: left;
+        box-sizing: border-box;
+        border: 1.5px solid $border-color;
+        min-height: 190px;
+        align-self: start;
+        .header {
+          display: flex;
+          justify-content: space-between;
+          h2 {
+            margin-bottom: $space-2;
+            font-weight: 500;
+          }
+          i {
+            font-size: 1.5rem;
+            color: $smoke-grey-dark;
+          }
+        }
+        .content {
+          text-align: left;
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+
+    .box-row {
+      display: flex;
+      max-width: 1366px;
+      margin: auto;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      .box-col {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        margin: 10px;
+        flex-wrap: wrap;
+        .box {
+          padding: 14px;
+          margin: auto;
+          text-align: left;
+          box-sizing: border-box;
+          border: 2px solid $border-color;
+          min-width: 322px;
+          height: 185px;
+          align-self: start;
+          .header {
+            display: flex;
+            justify-content: space-between;
+            h2 {
+              margin-bottom: $space-2;
+              font-weight: 500;
+            }
+            i {
+              font-size: 1.3em;
+              color: $smoke-grey-dark;
+            }
+          }
+          .content {
+            text-align: left;
+            p {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//newsletter
+.newsletter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: $blue;
+  opacity: 0.9;
+  max-width: 640px;
+  min-width: 550px;
+  // height: 210px;
+  height: 0;
+  padding: 0;
+  z-index: 10;
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .content {
+    visibility: hidden;
+    h2 {
+      font-weight: bold;
+      margin-bottom: $space-2;
+    }
+    p {
+      font-size: 1rem;
+    }
+    margin-bottom: $space-3;
+  }
+
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: flex-start;
+    align-items: center;
+    .field {
+      flex: 5;
+      margin-right: $space-4;
+      input {
+        width: 100%;
+        background: white;
+        margin-right: $space-1;
+        font-weight: 500;
+      }
+    }
+    .action {
+      flex: 1;
+      flex-basis: 40px;
+      button {
+        width: 100%;
+        background-color: $orange;
+        border: none;
+        font-weight: bold;
+        border-radius: 2px;
+        font-size: 0.85rem;
+        padding: 6px;
+      }
+    }
+  }
+  transition-property: height visibility;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+  -webkit-transition-property: height visibility;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-property: height visibility;
+  -moz-transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-out;
+  &.toggle-newsletter {
+    max-width: 640px;
+    min-width: 550px;
+    height: 210px;
+    padding: 2rem 1.5rem;
+    .content {
+      visibility: visible;
+      h2 {
+        font-weight: bold;
+        margin-bottom: $space-2;
+      }
+      p {
+        font-size: 16px;
+      }
+      margin-bottom: $space-3;
+    }
+  }
+}
+
+footer {
+  background-color: $dark-blue;
+  width: 100%;
+  text-align: center;
+  line-height: normal !important;
+  font-size: 0.9rem !important;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  p {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
+@media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-desktop) {
+  h1 {
+    font-size: 1.9rem !important;
+  }
+  h2 {
+    font-size: 1.2rem !important;
+  }
+  p {
+    font-size: 0.85rem !important;
+    line-height: 1.3;
+  }
+
+  // Notification panel tablet
+  .notification {
+    min-width: 100%;
+    .row {
+      padding: 5px;
+      width: 90%;
+      justify-content: space-between;
+      margin: auto;
+
+      .col-content {
+        width: 85%;
+        padding: $space-1;
+      }
+      .col-button {
+        width: 15%;
+        padding: $space-1;
+        button {
+          color: white;
+          background-color: $blue;
+          border-radius: 5px;
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+
+  //Hero Shot tablet
+  .banner {
+    .container.hero {
+      max-height: 400px;
+      .row.content {
+        button {
+          padding: 8px;
+          border: 2px solid $smoke-grey;
+          background-color: transparent;
+          font-size: 0.8rem;
+          font-weight: normal;
+        }
+        .btn-special {
+          margin-top: $space-3;
+          width: 175px;
+          padding: 4px;
+          button {
+            font-weight: bold;
+            border-radius: 2px;
+            width: 100%;
+            font-size: 0.8rem;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  // Info how can i help you tablet
+  .info {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    .container {
+      .title {
+        margin-bottom: 3rem;
+        max-width: 100%;
+      }
+      .box-grid-row {
+        display: grid;
+        grid-gap: 25px;
+        margin: auto;
+        grid-template-columns: 1fr 1fr;
+        .box {
+          padding: $space-2;
+          min-height: 170px;
+        }
+      }
+      .box-row {
+        .box-col {
+          margin: 5px;
+          width: 50%;
+          .box {
+            padding: 10px;
+            min-width: 280px;
+            max-height: 140px;
+          }
+        }
+      }
+    }
+  }
+
+  //newsletter tablet
+  .newsletter {
+    max-width: 450px;
+    min-width: 380px;
+    padding: 0;
+    z-index: 10;
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .content {
+      h2 {
+        margin-bottom: $space-2;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+      margin-bottom: $space-3;
+    }
+
+    .form {
+      .field {
+        flex: 5;
+        margin-right: $space-4;
+      }
+      .action {
+        flex: 1;
+        flex-basis: 40px;
+        button {
+          width: 100%;
+          background-color: $orange;
+          border: none;
+          font-weight: bold;
+          border-radius: 2px;
+          font-size: 0.8rem;
+          padding: 7px;
+        }
+      }
+    }
+
+    &.toggle-newsletter {
+      max-width: 450px;
+      min-width: 380px;
+      height: 185px;
+      padding: 2rem 1.5rem;
+      .content {
+        visibility: visible;
+        h2 {
+          font-weight: bold;
+          margin-bottom: $space-2;
+        }
+        p {
+          font-size: 16px;
+        }
+        margin-bottom: $space-3;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  h1 {
+    font-size: 1.7rem !important;
+  }
+  h2 {
+    font-size: 1.2rem !important;
+  }
+  p {
+    font-size: 0.82rem !important;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+  }
+
+  // Notification panel mobile
+  .notification {
+    height: 125px;
+    min-width: 100%;
+    .row {
+      padding: 2.5px 10px;
+      width: 100%;
+      font-size: 0.7rem;
+      justify-content: flex-start;
+      .col-content {
+        width: 100%;
+        margin-right: 0;
+        p {
+          line-height: 1.25 !important;
+        }
+      }
+      .col-button {
+        width: 100%;
+      }
+      button {
+        color: white;
+        background-color: $blue;
+        border-radius: 5px;
+        padding: 8px 12px;
+      }
+    }
+  }
+
+  // Hero shot mobile
+
+  .banner {
+    margin-top: 125px;
+    .container.hero {
+      max-height: 400px;
+      padding: $space-2;
+      .row.content {
+        button {
+          padding: 8px;
+          border: 2px solid $smoke-grey;
+          background-color: transparent;
+          font-size: 0.8rem;
+          font-weight: normal;
+        }
+        .btn-special {
+          margin-top: $space-3;
+          width: 175px;
+          padding: 4px;
+          button {
+            font-weight: bold;
+            border-radius: 2px;
+            width: 100%;
+            font-size: 0.8rem;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  .info {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    .container {
+      .box-grid-row {
+        display: grid;
+        grid-gap: 20px;
+        margin: auto;
+        grid-template-columns: 1fr;
+        .box {
+          padding: $space-3;
+          min-height: 120px;
+        }
+      }
+      .box-row {
+        .box-col {
+          margin: 0;
+          min-width: 100%;
+          min-height: 100%;
+          padding: $space-2;
+          .box {
+            // padding: 10px;
+            width: 100%;
+            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  //Newslatter mobile
+  .newsletter {
+    max-width: 450px;
+    min-width: 380px;
+    padding: 0;
+    z-index: 10;
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .content {
+      h2 {
+        margin-bottom: $space-2;
+      }
+      margin-bottom: $space-3;
+    }
+
+    .form {
+      display: block;
+      .field {
+        flex: 5;
+        margin-right: $space-4;
+        margin-bottom: $space-2;
+        width: 100%;
+        input {
+          padding: $space-1;
+        }
+      }
+      .action {
+        flex: 1;
+        flex-basis: 40px;
+        button {
+          width: 100%;
+          background-color: $orange;
+          border: none;
+          font-weight: bold;
+          border-radius: 2px;
+          font-size: 0.7rem;
+          padding: 6px;
+        }
+      }
+    }
+
+    &.toggle-newsletter {
+      max-width: 100%;
+      min-width: 100%;
+      height: 255px;
+      padding: 1.5rem;
+      .content {
+        visibility: visible;
+        h2 {
+          font-weight: bold;
+          margin-bottom: $space-2;
+        }
+        p {
+          font-size: 0.7rem;
+        }
+        margin-bottom: $space-3;
+      }
+    }
+  }
+}
