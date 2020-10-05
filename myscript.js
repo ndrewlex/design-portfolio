@@ -10,20 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   //animation for newsletter sliding
+  const newsSessionKey = "news-status";
   var newsletter = document.getElementById("newsletter");
   var closeNewsLetter = document.getElementById("close-newsletter");
-  const newsSessionKey = "news-status";
-
-  let newsSession = sessionStorage.getItem(newsSessionKey);
-
-  if (!newsSession || newsSession === null) {
-    sessionStorage.setItem(newsSessionKey, "open");
-    newsletter.classList.add("toggle-newsletter");
-  } else if (newsSession === "open") {
-    newsletter.classList.add("toggle-newsletter");
-  } else if (newsSession === "close") {
-    countdown();
-  }
 
   var timer;
   function countdown() {
@@ -39,10 +28,29 @@ document.addEventListener("DOMContentLoaded", function () {
   closeNewsLetter.addEventListener("click", function () {
     newsletter.classList.remove("toggle-newsletter");
     sessionStorage.setItem(newsSessionKey, "close");
+    countdown();
   });
 
-  let last_known_scroll_position = 0;
-  let ticking = false;
+  const newsSessionChecker = (offsetTop = 0, offsetOverHalfOfThePage = 0) => {
+    const newsSession = sessionStorage.getItem(newsSessionKey);
+    const isNewsLetterOpen = newsletter.classList.contains("toggle-newsletter");
+
+    if (newsSession === "open" && !isNewsLetterOpen) {
+      sessionStorage.setItem(newsSessionKey, "open");
+      newsletter.classList.add("toggle-newsletter");
+    } else if (newsSession === "close" && isNewsLetterOpen) {
+      newsletter.classList.remove("toggle-newsletter");
+    }
+
+    if (newsSession === null || !newsSession) {
+      if (offsetTop >= offsetOverHalfOfThePage && offsetTop > 0) {
+        newsletter.classList.add("toggle-newsletter");
+        sessionStorage.setItem(newsSessionKey, "open");
+      }
+    }
+  };
+
+  newsSessionChecker();
 
   function doSomething(pos) {
     let scrollHeight = Math.max(
@@ -55,19 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     const offsetTop = Math.round(pos + document.body.clientHeight);
-
-    const newsSession = sessionStorage.getItem(newsSessionKey);
-    //1. Check if offsetTop is equal to scrollHeight
-    if (offsetTop === scrollHeight && newsSession === "open") {
-      //show newsletter when session is true
-      newsletter.classList.add("toggle-newsletter");
-    }
-
-    //2. If newsletter session is close
-    if (newsSession === "close") {
-      newsletter.classList.remove("toggle-newsletter");
-    }
+    const offsetOverHalfOfThePage = scrollHeight - 0.1 * scrollHeight;
+    newsSessionChecker(offsetTop, offsetOverHalfOfThePage);
   }
+
+  let last_known_scroll_position = 0;
+  let ticking = false;
 
   window.addEventListener("scroll", function (e) {
     last_known_scroll_position = window.scrollY;
