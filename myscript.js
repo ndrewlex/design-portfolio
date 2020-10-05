@@ -14,11 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
   var closeNewsLetter = document.getElementById("close-newsletter");
   const newsSessionKey = "news-status";
 
-  closeNewsLetter.addEventListener("click", function () {
-    newsletter.classList.remove("toggle-newsletter");
-    sessionStorage.setItem(newsSessionKey, "close");
+  let newsSession = sessionStorage.getItem(newsSessionKey);
+
+  if (!newsSession || newsSession === null) {
+    sessionStorage.setItem(newsSessionKey, "open");
+    newsletter.classList.add("toggle-newsletter");
+  } else if (newsSession === "open") {
+    newsletter.classList.add("toggle-newsletter");
+  } else if (newsSession === "close") {
     countdown();
-  });
+  }
 
   var timer;
   function countdown() {
@@ -30,6 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
       //10 minutes to reopen
     }, 10 * 1000 * 6000);
   }
+
+  closeNewsLetter.addEventListener("click", function () {
+    newsletter.classList.remove("toggle-newsletter");
+    sessionStorage.setItem(newsSessionKey, "close");
+  });
+
+  let last_known_scroll_position = 0;
+  let ticking = false;
 
   function doSomething(pos) {
     let scrollHeight = Math.max(
@@ -43,25 +56,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const offsetTop = Math.round(pos + document.body.clientHeight);
 
+    const newsSession = sessionStorage.getItem(newsSessionKey);
     //1. Check if offsetTop is equal to scrollHeight
-    if (offsetTop > scrollHeight - 100 && offsetTop <= scrollHeight) {
-      newsLetterChecker();
-    } else {
-      newsLetterChecker();
+    if (offsetTop === scrollHeight && newsSession === "open") {
+      //show newsletter when session is true
+      newsletter.classList.add("toggle-newsletter");
     }
 
-    const newsLetterChecker = () => {
-      const newsSession = sessionStorage.getItem(newsSessionKey);
-      if (newsSession === "close") {
-        newsletter.classList.remove("toggle-newsletter");
-      } else if (newsSession === "open") {
-        newsletter.classList.add("toggle-newsletter");
-      }
-    };
+    //2. If newsletter session is close
+    if (newsSession === "close") {
+      newsletter.classList.remove("toggle-newsletter");
+    }
   }
 
-  let last_known_scroll_position = 0;
-  let ticking = false;
   window.addEventListener("scroll", function (e) {
     last_known_scroll_position = window.scrollY;
 
